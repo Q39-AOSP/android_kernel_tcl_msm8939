@@ -50,6 +50,7 @@
 #include <linux/irq.h>
 #include <linux/module.h>
 #include <linux/input/mt.h>
+#include <linux/interrupt.h>
 #include <linux/debugfs.h>
 
 #define GOODIX_DEV_NAME	"Goodix-CTP"
