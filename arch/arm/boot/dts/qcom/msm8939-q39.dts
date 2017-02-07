@@ -16,6 +16,7 @@
 #include "dsi-panel-sharp-r61322-pwm-1080p-video.dtsi"
 #include "dsi-panel-nt35596-auo-1080p-skuk-video.dtsi"
 #include "dsi-panel-nt35596-auo-1080p-skuk-pwm-video.dtsi"
+#include "msm8939-camera-sensor-q39.dtsi"
 
 / {
 	model = "Qualcomm Technologies, Inc. MSM8939 QRD Q39";
