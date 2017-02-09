@@ -27,7 +27,6 @@
 				bias-pull-down;
 				};
 			};
-		};
 
 		akm_reset_pin {
 			qcom,pins = <0x126 0x10>;
@@ -45,6 +44,8 @@
 			bias-pull-down;
 			};
 		};
+};
+
 &cci {
 
 		actuator0: qcom,actuator@0 {
