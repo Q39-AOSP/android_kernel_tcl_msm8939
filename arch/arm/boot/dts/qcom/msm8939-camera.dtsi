@@ -12,7 +12,7 @@
  */
 
 &soc {
-	qcom,msm-cam@1800000{
+	qcom,msm-cam@1800000 {
 		compatible = "qcom,msm-cam";
 	};
 
