@@ -28,6 +28,23 @@
 				};
 			};
 		};
+
+		akm_reset_pin {
+			qcom,pins = <0x126 0x10>;
+			qcom,pin-func = <0x0>;
+			qcom,num-grp-pins = <0x1>;
+			label = "akm_reset_pin";
+
+			akm_default {
+				drive-strength = <0x6>;
+				bias-pull-up;
+			};
+
+			akm_sleep {
+			drive-strength = <0x2>;
+			bias-pull-down;
+			};
+		};
 &cci {
 
 		actuator0: qcom,actuator@0 {

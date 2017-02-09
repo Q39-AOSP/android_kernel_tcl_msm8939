@@ -160,12 +160,6 @@
 	qcom_seecom: qseecom@86000000 {
 			status = "okay";
 };
-	gfx_iommu: qcom,iommu@1f00000 {
-			status = "ok";
-};
-	apps_iommu: qcom,iommu@1e00000 {
-			status = "ok";
-};
 	sdhc_2: sdhci@7864000 {
 			status = "ok";
 			vdd-supply = <0xd3>;
