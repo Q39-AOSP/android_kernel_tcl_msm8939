@@ -10,8 +10,7 @@
  * GNU General Public License for more details.
  */
 
-/dts-v1/;
-
+#include "msm8939-qrd-skuk.dts"
 #include "dsi-panel-sharp-r61322-1080p-video.dtsi"
 #include "dsi-panel-sharp-r61322-pwm-1080p-video.dtsi"
 #include "dsi-panel-nt35596-auo-1080p-skuk-video.dtsi"
@@ -31,179 +30,179 @@
 		qcom,lpm-wa-cx-turbo-unvote;
 	};
 
-	&usb_otg {
+	usb_otg: usb@78d9000 {
 			qcom,usbid-gpio = <0x76 0x6e 0x0>;
 			pinctrl-names = "default";
 			pinctrl-0 = <0xa0>;
 			vbus_otg-supply = <0xa1>;
-		};
+	};
 
-	&i2c_0 {
-			di@1e {
-				compatible = "di,ap3426";
-				reg = <0x1e>;
-				vdd-supply = <0x70>;
-				vio-supply = <0x71>;
-				interrupt-parent = <0x76>;
-				interrupts = <0x71 0x2002>;
-				pinctrl-names = "default", "sleep";
-				pinctrl-0 = <0xae>;
-				pinctrl-1 = <0xaf>;
-				di,irq-gpio = <0x76 0x71 0x2002>;
-				di,als-cal = <0x4a>;
-				di,als-gain = <0x0>;
-				di,als-persist = <0x2>;
-				di,ps-gain = <0x2>;
-				di,ps-persist = <0x2>;
-				di,ps-led-driver = <0x0>;
-				di,ps-mean-time = <0x2>;
-				di,ps-integrated-time = <0x8>;
-				di,ps-distance-table = <0x377 0x11a 0x6f 0x4e 0x35 0x2e>;
-				di,als-sensitivity = <0x32>;
-				di,wakeup-threshold = <0x0>;
-			};
+	i2c_0: i2c@78b6000 { /* BLSP1 QUP2 */
+		di@1e {
+			compatible = "di,ap3426";
+			reg = <0x1e>;
+			vdd-supply = <0x70>;
+			vio-supply = <0x71>;
+			interrupt-parent = <0x76>;
+			interrupts = <0x71 0x2002>;
+			pinctrl-names = "default", "sleep";
+			pinctrl-0 = <0xae>;
+			pinctrl-1 = <0xaf>;
+			di,irq-gpio = <0x76 0x71 0x2002>;
+			di,als-cal = <0x4a>;
+			di,als-gain = <0x0>;
+			di,als-persist = <0x2>;
+			di,ps-gain = <0x2>;
+			di,ps-persist = <0x2>;
+			di,ps-led-driver = <0x0>;
+			di,ps-mean-time = <0x2>;
+			di,ps-integrated-time = <0x8>;
+			di,ps-distance-table = <0x377 0x11a 0x6f 0x4e 0x35 0x2e>;
+			di,als-sensitivity = <0x32>;
+			di,wakeup-threshold = <0x0>;
+	};
 
-			capella@60 {
-				compatible = "capella,cm36283";
-				reg = <0x60>;
-				interrupt-parent = <0x76>;
-				interrupts = <0x71 0x2>;
-				vdd-supply = <0x70>;
-				vio-supply = <0x71>;
-				capella,use-polling;
-				capella,interrupt-gpio = <0x76 0x71 0x2>;
-				capella,levels = <0xa 0xa0 0xe1 0x140 0x280 0x500 0xa28 0x16a8 0x1f40 0x2800>;
-				capella,ps_close_thd_set = <0x6>;
-				capella,ps_away_thd_set = <0x2>;
-				capella,ls_cmd = <0x4>;
-				capella,ps_conf1_val = <0x6>;
-				capella,ps_conf3_val = <0x3010>;
-			};
+		capella@60 {
+			compatible = "capella,cm36283";
+			reg = <0x60>;
+			interrupt-parent = <0x76>;
+			interrupts = <0x71 0x2>;
+			vdd-supply = <0x70>;
+			vio-supply = <0x71>;
+			capella,use-polling;
+			capella,interrupt-gpio = <0x76 0x71 0x2>;
+			capella,levels = <0xa 0xa0 0xe1 0x140 0x280 0x500 0xa28 0x16a8 0x1f40 0x2800>;
+			capella,ps_close_thd_set = <0x6>;
+			capella,ps_away_thd_set = <0x2>;
+			capella,ls_cmd = <0x4>;
+			capella,ps_conf1_val = <0x6>;
+			capella,ps_conf3_val = <0x3010>;
+	};
 
-			akm@d {
-				compatible = "ak,ak09911";
-				reg = <0xd>;
-				pinctrl-names = "default", "sleep";
-				pinctrl-0 = <0xb4>;
-				pinctrl-1 = <0xb5>;
-				vdd-supply = <0x70>;
-				vio-supply = <0x71>;
-				akm,layout = <0x3>;
-				akm,gpio_rstn = <0x76 0x10 0x0>;
-				akm,auto-report;
-			};
-		};
-	&i2c_4 {
-			smb1360-chg-fg@14 {
-				compatible = "qcom,smb1360-chg-fg";
-				reg = <0x14>;
-				interrupt-parent = <0x76>;
-				interrupts = <0x3e 0x2>;
-				pinctrl-names = "default";
-				pinctrl-0 = <0xc1>;
-				qcom,stat-pulsed-irq;
-				qcom,chg-inhibit-disabled;
-				qcom,fg-cutoff-voltage-mv = <0xd48>;
-				qcom,float-voltage-mv = <0x10fe>;
-				qcom,iterm-ma = <0x4b>;
-				qcom,charging-timeout = <0x0>;
-				qcom,otg-batt-curr-limit = <0x5dc>;
-				qcom,recharge-thresh-mv = <0x64>;
-				qcom,thermal-mitigation = <0x5dc 0x2bc 0x258 0x0>;
-				qcom,fg-auto-recharge-soc = <0x63>;
-				qcom,empty-soc-disabled;
-				regulator-name = "smb1360_otg_vreg";
-				qcom,awake-min-soc;
-				qcom,batt-profile-select;
-				qcom,smb1360-vadc = <0xc2>;
-				qcom,batt-id-vref-uv = <0x1b7740>;
-				qcom,batt-id-rpullup-kohm = <0x64>;
-				qcom,profile-a-rid-kohm = <0x21>;
-				qcom,profile-b-rid-kohm = <0xa>;
-				qcom,config-hard-thresholds;
-				qcom,hot-bat-decidegc = <0x1c2>;
-				qcom,cold-bat-decidegc = <0xffffffce>;
-				qcom,soft-jeita-supported;
-				qcom,warm-bat-decidegc = <0x1c2>;
-				qcom,cool-bat-decidegc = <0x64>;
-				qcom,warm-bat-mv = <0x1004>;
-				qcom,cool-bat-mv = <0x1004>;
-				qcom,warm-bat-ma = <0x2ee>;
-				qcom,cool-bat-ma = <0x2ee>;
-				qcom,fg-delta-soc = <0x1>;
-			};
-		};
-	&i2c_5 {
-			goodix@5d {
-				compatible = "goodix,gt9xx";
-				reg = <0x5d>;
-				interrupt-parent = <0x76>;
-				interrupts = <0xd 0x2008>;
-				vdd-supply = <0x70>;
-				vcc-i2c-supply = <0x71>;
-				goodix,reset-gpios = <0x76 0xc 0x0>;
-				goodix,interrupt-gpios = <0x76 0xd 0x0>;
-				goodix,button-map = <0x8b 0xac 0x9e>;
-				goodix,panel-coords = <0x0 0x0 0x438 0x780>;
-				goodix,display-coords = <0x0 0x0 0x438 0x780>;
-				goodix,product-id = "9157";
-				goodix,num_max_touches = <0x5>;
-				goodix,soft_rst_dly = <0x14>;
-				goodix,fw_name = "gtp_fw.bin";
-				goodix,fw-vkey-support;
-				goodix,i2c-pull-up;
-				goodix,no-force-update;
-			};
-		};
-	&qcom_crypto {
-				status = "okay";
-			};
-	&qcom_seecom {
-				status = "okay";
-			};
-	&gfx_iommu {
-	       status = "ok";
-			};
-	&apps_iommu {
-	       status = "ok";
-			};
-	&sdhc_2 {
-		status = "ok";
-		vdd-supply = <0xd3>;
-		qcom,vdd-voltage-level = <0x2ab980 0x2d0370>;
-		qcom,vdd-current-level = <0x3a98 0x61a80>;
-		vdd-io-supply = <0xd4>;
-		qcom,vdd-io-voltage-level = <0x1b7740 0x2d0370>;
-		qcom,vdd-io-current-level = <0xc8 0xc350>;
-		pinctrl-names = "active", "sleep";
-		pinctrl-0 = <0xd5 0xd6 0xd7 0xd8>;
-		pinctrl-1 = <0xd9 0xda 0xdb 0xdc>;
-		#address-cells = <0x0>;
-		interrupt-parent = <0xdd>;
-		#interrupt-cells = <0x1>;
-		interrupt-map-mask = <0xffffffff>;
-		interrupt-map = <0x0 0x1 0x0 0x7d 0x0 0x1 0x1 0x0 0xdd 0x0 0x2 0x76 0x26 0x0>;
-		cd-gpios = <0x76 0x26 0x1>;
-			};
-	mcd {
-		compatible = "qcom,mcd";
-		qcom,ce-hw-instance = <0x0>;
-		qcom,ce-device = <0x0>;
-		clocks = <0x1b 0x37a21414 0x1b 0xd390d2 0x1b 0x94de4919 0x1b 0xd4415c9b>;
-		clock-names = "core_clk_src", "core_clk", "iface_clk", "bus_clk";
-		qcom,ce-opp-freq = <0x5f5e100>;
-			};
+		akm@d {
+			compatible = "ak,ak09911";
+			reg = <0xd>;
+			pinctrl-names = "default", "sleep";
+			pinctrl-0 = <0xb4>;
+			pinctrl-1 = <0xb5>;
+			vdd-supply = <0x70>;
+			vio-supply = <0x71>;
+			akm,layout = <0x3>;
+			akm,gpio_rstn = <0x76 0x10 0x0>;
+			akm,auto-report;
+	};
+};
+	i2c_4: i2c@78b8000 { /* BLSP1 QUP4 */
+		smb1360-chg-fg@14 {
+			compatible = "qcom,smb1360-chg-fg";
+			reg = <0x14>;
+			interrupt-parent = <0x76>;
+			interrupts = <0x3e 0x2>;
+			pinctrl-names = "default";
+			pinctrl-0 = <0xc1>;
+			qcom,stat-pulsed-irq;
+			qcom,chg-inhibit-disabled;
+			qcom,fg-cutoff-voltage-mv = <0xd48>;
+			qcom,float-voltage-mv = <0x10fe>;
+			qcom,iterm-ma = <0x4b>;
+			qcom,charging-timeout = <0x0>;
+			qcom,otg-batt-curr-limit = <0x5dc>;
+			qcom,recharge-thresh-mv = <0x64>;
+			qcom,thermal-mitigation = <0x5dc 0x2bc 0x258 0x0>;
+			qcom,fg-auto-recharge-soc = <0x63>;
+			qcom,empty-soc-disabled;
+			regulator-name = "smb1360_otg_vreg";
+			qcom,awake-min-soc;
+			qcom,batt-profile-select;
+			qcom,smb1360-vadc = <0xc2>;
+			qcom,batt-id-vref-uv = <0x1b7740>;
+			qcom,batt-id-rpullup-kohm = <0x64>;
+			qcom,profile-a-rid-kohm = <0x21>;
+			qcom,profile-b-rid-kohm = <0xa>;
+			qcom,config-hard-thresholds;
+			qcom,hot-bat-decidegc = <0x1c2>;
+			qcom,cold-bat-decidegc = <0xffffffce>;
+			qcom,soft-jeita-supported;
+			qcom,warm-bat-decidegc = <0x1c2>;
+			qcom,cool-bat-decidegc = <0x64>;
+			qcom,warm-bat-mv = <0x1004>;
+			qcom,cool-bat-mv = <0x1004>;
+			qcom,warm-bat-ma = <0x2ee>;
+			qcom,cool-bat-ma = <0x2ee>;
+			qcom,fg-delta-soc = <0x1>;
+	};
+};
+	i2c_5: i2c@78b9000 { /* BLSP1 QUP5 */
+		goodix@5d {
+			compatible = "goodix,gt9xx";
+			reg = <0x5d>;
+			interrupt-parent = <0x76>;
+			interrupts = <0xd 0x2008>;
+			vdd-supply = <0x70>;
+			vcc-i2c-supply = <0x71>;
+			goodix,reset-gpios = <0x76 0xc 0x0>;
+			goodix,interrupt-gpios = <0x76 0xd 0x0>;
+			goodix,button-map = <0x8b 0xac 0x9e>;
+			goodix,panel-coords = <0x0 0x0 0x438 0x780>;
+			goodix,display-coords = <0x0 0x0 0x438 0x780>;
+			goodix,product-id = "9157";
+			goodix,num_max_touches = <0x5>;
+			goodix,soft_rst_dly = <0x14>;
+			goodix,fw_name = "gtp_fw.bin";
+			goodix,fw-vkey-support;
+			goodix,i2c-pull-up;
+			goodix,no-force-update;
+	};
+};
+	qcom_crypto: qcrypto@720000 {
+			status = "okay";
+};
+	qcom_seecom: qseecom@86000000 {
+			status = "okay";
+};
+	gfx_iommu: qcom,iommu@1f00000 {
+			status = "ok";
+};
+	apps_iommu: qcom,iommu@1e00000 {
+			status = "ok";
+};
+	sdhc_2: sdhci@7864000 {
+			status = "ok";
+			vdd-supply = <0xd3>;
+			qcom,vdd-voltage-level = <0x2ab980 0x2d0370>;
+			qcom,vdd-current-level = <0x3a98 0x61a80>;
+			vdd-io-supply = <0xd4>;
+			qcom,vdd-io-voltage-level = <0x1b7740 0x2d0370>;
+			qcom,vdd-io-current-level = <0xc8 0xc350>;
+			pinctrl-names = "active", "sleep";
+			pinctrl-0 = <0xd5 0xd6 0xd7 0xd8>;
+			pinctrl-1 = <0xd9 0xda 0xdb 0xdc>;
+			#address-cells = <0x0>;
+			interrupt-parent = <0xdd>;
+			#interrupt-cells = <0x1>;
+			interrupt-map-mask = <0xffffffff>;
+			interrupt-map = <0x0 0x1 0x0 0x7d 0x0 0x1 0x1 0x0 0xdd 0x0 0x2 0x76 0x26 0x0>;
+			cd-gpios = <0x76 0x26 0x1>;
+};
+		mcd {
+			compatible = "qcom,mcd";
+			qcom,ce-hw-instance = <0x0>;
+			qcom,ce-device = <0x0>;
+			clocks = <0x1b 0x37a21414 0x1b 0xd390d2 0x1b 0x94de4919 0x1b 0xd4415c9b>;
+			clock-names = "core_clk_src", "core_clk", "iface_clk", "bus_clk";
+			qcom,ce-opp-freq = <0x5f5e100>;
+};
 
-	gpio-leds {
-		compatible = "gpio-leds";
+		gpio-leds {
+			compatible = "gpio-leds";
 
-		keypad-backlight {
-			gpios = <0x76 0x0 0x0>;
-			label = "button-backlight";
-			linux,default-trigger = "none";
-			default-state = "off";
-			};
-		};
+			keypad-backlight {
+				gpios = <0x76 0x0 0x0>;
+				label = "button-backlight";
+				linux,default-trigger = "none";
+				default-state = "off";
+	};
+};
 
 		gpio-leds-simcom {
 			compatible = "gpio-leds-simcom";
