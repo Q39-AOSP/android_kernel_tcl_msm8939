@@ -37,13 +37,13 @@
 				qcom,mdss-dsi-underflow-color = <0xff>;
 				qcom,mdss-dsi-border-color = <0>;
 				qcom,mdss-dsi-on-command = [15 01 00 00 00 00 02 51 00 
-					15 01 00 00 00 00 02 53 00 
-					15 01 00 00 00 00 02 55 00 05 01 00 00 00 00 02 29 00 05 01 00 00 78 00 02 11 00];
+							15 01 00 00 00 00 02 53 00 
+							15 01 00 00 00 00 02 55 00 05 01 00 00 00 00 02 29 00 05 01 00 00 78 00 02 11 00];
 				qcom,mdss-dsi-off-command = [05 01 00 00 32 00 02 28 00 
-					05 01 00 00 78 00 02 10 00];
+							05 01 00 00 78 00 02 10 00];
 				qcom,mdss-dsi-on-command-state = "dsi_lp_mode";
 				qcom,mdss-dsi-off-command-state = "dsi_hs_mode";
-				qcom,mdss-dsi-h-sync-pulse = <0x1>;
+				qcom,mdss-dsi-h-sync-pulse = <1>;
 				qcom,mdss-dsi-traffic-mode = "burst_mode";
 				qcom,mdss-dsi-lane-map = "lane_map_0123";
 				qcom,mdss-dsi-bllp-eof-power-mode;
@@ -52,22 +52,22 @@
 				qcom,mdss-dsi-lane-1-state;
 				qcom,mdss-dsi-lane-2-state;
 				qcom,mdss-dsi-lane-3-state;
-				qcom,mdss-dsi-panel-timings = <0xf93a2800 0x6e702c3e 0x31030400>;
+				qcom,mdss-dsi-panel-timings = <f9 3a 28 00 6e 70 2c 3e 31 03 04 00>;
 				qcom,mdss-dsi-t-clk-post = <0x1e>;
 				qcom,mdss-dsi-t-clk-pre = <0x38>;
 				qcom,cont-splash-enabled;
 				qcom,esd-check-enabled;
 				qcom,mdss-dsi-pan-enable-dynamic-fps;
-				qcom,mdss-dsi-bl-min-level = <0x1>;
-				qcom,mdss-dsi-bl-max-level = <0xff>;
+				qcom,mdss-dsi-bl-min-level = <1>;
+				qcom,mdss-dsi-bl-max-level = <255>;
 				qcom,mdss-dsi-dma-trigger = "trigger_sw";
 				qcom,mdss-dsi-mdp-trigger = "none";
 				qcom,mdss-dsi-bl-pmic-control-type = "bl_ctrl_pwm";
-				qcom,mdss-dsi-bl-pmic-pwm-frequency = <0x32>;
-				qcom,mdss-dsi-bl-pmic-bank-select = <0x0>;
-				qcom,mdss-dsi-pwm-gpio = <0x6c 0x4 0x0>;
-				qcom,mdss-dsi-reset-sequence = <0x0 0x14 0x0 0x28 0x1 0x14>;
-				qcom,mdss-pan-physical-width-dimension = <0x3e>;
-				qcom,mdss-pan-physical-height-dimension = <0x6e>;
+				qcom,mdss-dsi-bl-pmic-pwm-frequency = <50>;
+				qcom,mdss-dsi-bl-pmic-bank-select = <0>;
+				qcom,mdss-dsi-pwm-gpio = <108 4 0>;
+				qcom,mdss-dsi-reset-sequence = <0 20>,<0 40>,<1 20>;
+				qcom,mdss-pan-physical-width-dimension = <62>;
+				qcom,mdss-pan-physical-height-dimension = <110>;
 			};
 };
