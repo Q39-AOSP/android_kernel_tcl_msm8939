@@ -594,7 +594,7 @@
 				qcom,mdss-dsi-lane-1-state;
 				qcom,mdss-dsi-lane-2-state;
 				qcom,mdss-dsi-lane-3-state;
-				qcom,mdss-dsi-panel-timings = <9e 43 37 00 60 58 39 45 5b 03 04 00>;
+				qcom,mdss-dsi-panel-timings = [9e 43 37 00 60 58 39 45 5b 03 04 00];
 				qcom,mdss-dsi-t-clk-post = <0x1e>;
 				qcom,mdss-dsi-t-clk-pre = <0x38>;
 				qcom,mdss-dsi-bl-min-level = <1>;
