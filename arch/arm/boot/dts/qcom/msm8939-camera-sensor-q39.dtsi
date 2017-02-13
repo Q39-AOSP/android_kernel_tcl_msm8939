@@ -44,50 +44,6 @@
 			bias-pull-down;
 			};
 		};
-
-		bma2x2_int1_pin {
-			qcom,pins = <&gp 112>;
-			qcom,num-grp-pins = <1>;
-			label = "bma2x2_int1_pin";
-
-			bma2x2_int1_default: int1_default {
-			drive-strength = <6>;
-			bias-pull-up;
-			};
-
-			bma2x2_int1_sleep: int1_sleep {
-			drive-strength = <2>;
-			bias-pull-down;
-			};
-		};
-
-		bma2x2_int2_pin {
-			qcom,pins = <&gp 114>;
-			qcom,num-grp-pins = <1>;
-			label = "bma2x2_int2_pin";
-
-			bma2x2_int2_default: int2_default {
-			drive-strength = <6>;
-			bias-pull-up;
-			};
-
-			bma2x2_int2_sleep: int2_sleep {
-			drive-strength = <2>;
-			bias-pull-down;
-			};
-		};
-
-		tps65132-en-pin {
-			qcom,pins = <&gp 97>, <&gp 98>;
-			qcom,num-grp-pins = <2>;
-			label = "tps65132_en_pins";
-			qcom,pin-func = <0>;
-
-			tps65132_en_default: en-default {
-			drive-strength = <2>;
-			bias-pull-down;
-			};
-		};
 };
 
 &cci {
