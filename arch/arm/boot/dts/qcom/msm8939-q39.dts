@@ -63,7 +63,7 @@
 		capella@60 {
 			compatible = "capella,cm36283";
 			reg = <0x60>;
-			interrupt-parent = <&msmgpio>;
+			interrupt-parent = <&msm_gpio>;
 			interrupts = <113 0x2>;
 			vdd-supply = <&pm8916_l17>;
 			vio-supply = <&pm8916_l6>;
@@ -139,7 +139,7 @@
 		goodix@5d {
 			compatible = "goodix,gt9xx";
 			reg = <0x5d>;
-			interrupt-parent = <&msmgpio>;
+			interrupt-parent = <&msm_gpio>;
 			interrupts = <13 0x2008>;
 			vdd-supply = <&pm8916_l17>;
 			vcc-i2c-supply = <&pm8916_l6>;
