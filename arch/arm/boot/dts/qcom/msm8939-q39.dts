@@ -258,3 +258,6 @@
 			qcom,support-fde;
 			status = "okay";
 		};
+		&android_usb {
+			qcom,android-usb-cdrom;
+		};
