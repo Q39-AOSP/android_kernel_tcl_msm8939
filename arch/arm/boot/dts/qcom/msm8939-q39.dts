@@ -130,6 +130,14 @@
 			qcom,config-hard-thresholds;
 			qcom,hot-bat-decidegc = <550>;
 			qcom,cold-bat-decidegc = <(-150)>;
+			qcom,soft-jeita-supported;
+			qcom,warm-bat-decidegc = <450>;
+			qcom,cool-bat-decidegc = <100>;
+			qcom,warm-bat-mv = <4100>;
+			qcom,cool-bat-mv = <4100>;
+			qcom,warm-bat-ma = <750>;
+			qcom,cool-bat-ma = <750>;
+			qcom,fg-delta-soc = <1>;
 		};
 	};
 
@@ -201,11 +209,15 @@
 			lpm-cx-supply = <105>;
 			qcom,lpm-wa-cx-turbo-unvote;
 		};
+
+		restart@4ab000 {
+			reg = <0x4ab000 0x4 0x193d100 0x4>;
+		};
 };
 
-&spmi_bus {
-		/delete-property/ qcom,led_mpp_2;
-	};
+		&pm8916_leds {
+			/delete-node/ qcom,led_mpp_2;
+		};
 
 		&pm8916_chg {
 			status = "ok";
@@ -223,6 +235,7 @@
 
 		&mdss_dsi0 {
        			qcom,dsi-pref-prim-pan = <&dsi_sim_vid>;
+			/delete-property/ qcom,platform-bklight-en-gpio;
 		};
 
 		&qcom_tzlog {
@@ -233,6 +246,7 @@
 		};
 
 		&qcom_crypto {
+			qcom,clk-mgmt-sus-res;
 			status = "okay";
 		};
 
@@ -241,5 +255,6 @@
 		};
 
 		&qcom_seecom {
+			qcom,support-fde;
 			status = "okay";
 		};
