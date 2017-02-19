@@ -169,18 +169,6 @@
 			label = "gt9xx";
 		};
 
-		mcd {
-			compatible = "qcom,mcd";
-			qcom,ce-hw-instance = <0>;
-			qcom,ce-device = <0>;
-			clocks = <&clock_gcc clk_crypto_clk_src>,
-			 <&clock_gcc clk_gcc_crypto_clk>,
-			 <&clock_gcc clk_gcc_crypto_ahb_clk>,
-			 <&clock_gcc clk_gcc_crypto_axi_clk>;
-			clock-names = "core_clk_src", "core_clk", "iface_clk", "bus_clk";
-			qcom,ce-opp-freq = <100000000>;
-		};
-
 		gpio-leds {
 			compatible = "gpio-leds";
 
@@ -205,14 +193,11 @@
 			};
 		};
 
-		qcom,lpm-workarounds {
-			compatible = "qcom,lpm-workarounds";
-			lpm-cx-supply = <105>;
-			qcom,lpm-wa-cx-turbo-unvote;
-		};
-
-		restart@4ab000 {
-			reg = <0x4ab000 0x4 0x193d100 0x4>;
+		qcom,lpm-workarounds {		
+			compatible = "qcom,lpm-workarounds";		
+		
+			lpm-cx-supply = <&pm8916_s2_corner>;		
+			qcom,lpm-wa-cx-turbo-unvote;		
 		};
 };
 
@@ -247,7 +232,6 @@
 		};
 
 		&qcom_crypto {
-			qcom,clk-mgmt-sus-res;
 			status = "okay";
 		};
 
@@ -256,9 +240,5 @@
 		};
 
 		&qcom_seecom {
-			qcom,support-fde;
 			status = "okay";
-		};
-		&android_usb {
-			qcom,android-usb-cdrom;
 		};
