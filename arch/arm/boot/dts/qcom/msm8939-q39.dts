@@ -202,7 +202,6 @@
 };
 
 		&pm8916_leds {
-			/delete-property/ status;
 			/delete-node/ qcom,led_mpp_2;
 		};
 
@@ -225,6 +224,21 @@
 			/delete-property/ qcom,platform-bklight-en-gpio;
 		};
 
-		&mpu6050_default {
-			bias-pull-up;
+		&qcom_tzlog {
+			status = "okay";
+		};
+		&qcom_rng {
+			status = "okay";
+		};
+
+		&qcom_crypto {
+			status = "okay";
+		};
+
+		&qcom_cedev {
+			status = "okay";
+		};
+
+		&qcom_seecom {
+			status = "okay";
 		};
