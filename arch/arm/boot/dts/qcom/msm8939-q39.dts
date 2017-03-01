@@ -64,8 +64,8 @@
 			reg = <0x60>;
 			interrupt-parent = <&msm_gpio>;
 			interrupts = <113 0x2>;
-			vdd-supply = <&pm8916_l6>;
-			vio-supply = <113>;
+			vdd-supply = <&pm8916_l17>;
+			vio-supply = <&pm8916_l6>;
 			capella,use-polling;
 			capella,interrupt-gpio = <&msm_gpio 113 0x2>;
 			capella,levels = <0x0A 0xA0 0xE1 0x140 0x280 0x500 0xA28 0x16A8 0x1F40 					0x2800>;
