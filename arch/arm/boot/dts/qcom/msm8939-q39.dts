@@ -112,10 +112,11 @@
 			pinctrl-0 = <&smb_int_default>;
 			qcom,stat-pulsed-irq;
 			qcom,chg-inhibit-disabled;
+			qcom,fg-cutoff-voltage-mv = <3400>;
 			qcom,float-voltage-mv = <4350>;
-			qcom,iterm-ma = <200>;
-			qcom,charging-timeout = <384>;
-			qcom,otg-batt-curr-limit = <950>;
+			qcom,iterm-ma = <75>;
+			qcom,charging-timeout = <0>;
+			qcom,otg-batt-curr-limit = <1500>;
 			qcom,recharge-thresh-mv = <100>;
 			qcom,thermal-mitigation = <1500 700 600 0>;
 			qcom,fg-auto-recharge-soc = <99>;
