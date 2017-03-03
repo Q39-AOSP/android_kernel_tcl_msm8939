@@ -13,7 +13,7 @@
 /dts-v1/;
 
 #include "msm8939.dtsi"
-#include "msm8939-pinctrl.dtsi"
+#include "msm8939-qrd.dtsi"
 #include "q39/msm8939-q39.dtsi"
 
 / {
