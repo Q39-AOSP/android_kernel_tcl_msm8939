@@ -1,0 +1,74 @@
+/* Copyright (c) 2017, The Linux Foundation. All rights reserved.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 and
+ * only version 2 as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ */
+
+/dts-v1/;
+
+#include "msm8939.dtsi"
+#include "msm8939-qrd.dtsi"
+#include "q39/msm8939-q39.dtsi"
+
+/ {
+	qcom,board-id = <0x10011 5 0x20011 5>;
+};
+
+&soc {
+	i2c@78b8000 { /* BLSP1 QUP4 */
+		smb1360_otg_supply: smb1360-chg-fg@14 {
+			compatible = "qcom,smb1360-chg-fg";
+			reg = <0x14>;
+			interrupt-parent = <&msm_gpio>;
+			interrupts = <62 2>;
+			pinctrl-names = "default";
+			pinctrl-0 = <&smb_int_default>;
+			qcom,stat-pulsed-irq;
+			qcom,chg-inhibit-disabled;
+			qcom,fg-cutoff-voltage-mv = <3400>;
+			qcom,float-voltage-mv = <4350>;
+			qcom,iterm-ma = <75>;
+			qcom,charging-timeout = <0>;
+			qcom,otg-batt-curr-limit = <1500>;
+			qcom,recharge-thresh-mv = <100>;
+			qcom,thermal-mitigation = <1500 700 600 0>;
+			qcom,fg-auto-recharge-soc = <99>;
+			qcom,empty-soc-disabled;
+			regulator-name = "smb1360_otg_vreg";
+			qcom,awake-min-soc;
+			qcom,batt-profile-select;
+			qcom,smb1360-vadc = <&pm8916_vadc>;
+			qcom,batt-id-vref-uv = <1800000>;
+			qcom,batt-id-rpullup-kohm = <100>;
+			qcom,profile-a-rid-kohm = <33>;
+			qcom,profile-b-rid-kohm = <10>;
+			qcom,config-hard-thresholds;
+			qcom,hot-bat-decidegc = <450>;
+			qcom,cold-bat-decidegc = <(-50)>;
+			qcom,soft-jeita-supported;
+			qcom,warm-bat-decidegc = <450>;
+			qcom,cool-bat-decidegc = <100>;
+			qcom,warm-bat-mv = <4100>;
+			qcom,cool-bat-mv = <4100>;
+			qcom,warm-bat-ma = <750>;
+			qcom,cool-bat-ma = <750>;
+			qcom,fg-delta-soc = <1>;
+		};
+	};
+};
+
+		&pm8916_chg {
+			status = "ok";
+			qcom,use-external-charger;
+		};
+
+		&pm8916_bms {
+			status = "ok";
+			qcom,disable-bms;
+		};
