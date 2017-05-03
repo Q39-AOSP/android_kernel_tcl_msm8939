@@ -148,7 +148,7 @@
 	/delete-property/ qcom,nonhotplug;
 	interrupts = <0 1 2>;
 	interrupt-map = <0 &intc 0 125 0
-		1 &intc 0 221 0>;
+		1 &intc 0 221 0
 		2 &msm_gpio 38 0>;
 	interrupt-names = "hc_irq", "pwr_irq", "status_irq";
 };
