@@ -146,6 +146,7 @@
 
 &sdhc_2 {
 	/delete-property/ qcom,nonhotplug;
+	/delete-node/ cd-gpios;
 	interrupts = <0 1 2>;
 	interrupt-map = <0 &intc 0 125 0
 		1 &intc 0 221 0
