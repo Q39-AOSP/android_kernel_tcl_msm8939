@@ -44,55 +44,10 @@
 			goodix,i2c-pull-up;
 			goodix,no-force-update;
 		};
+		/delete-node/ focaltech@38;
 	};
 
 	i2c@78b6000 { /* BLSP1 QUP2 */
-		akm@d {
-			compatible = "ak,ak09911";
-			reg = <0xd>;
-			pinctrl-names = "default", "sleep";
-			pinctrl-0 = <&akm_default>;
-			pinctrl-1 = <&akm_sleep>;
-			vdd-supply = <&pm8916_l17>;
-			vio-supply = <&pm8916_l6>;
-			akm,layout = <0x3>;
-			akm,gpio_rstn = <&msm_gpio 16 0x0>;
-			akm,auto-report;
-		};
-
-		bosch@18 { /* Accelerometer sensor */
-			compatible = "bosch,bma2x2";
-			reg = <0x18>;
-			pinctrl-names = "bma_default","bma_sleep";
-			pinctrl-0 = <&bma2x2_int1_default &bma2x2_int2_default>;
-			pinctrl-1 = <&bma2x2_int1_sleep &bma2x2_int2_sleep>;
-			interrupt-parent = <&msm_gpio>;
-			interrupts = <112 0x2002>;
-			vdd-supply = <&pm8916_l17>;
-			vio-supply = <&pm8916_l6>;
-			bosch,init-interval = <200>;
-			bosch,place = <2>;
-			bosch,gpio-int1 = <&msm_gpio 112 0x2002>;
-			bosch,gpio-int2 = <&msm_gpio 114 0x2002>;
-		};
-
-		capella@60 {
-			compatible = "capella,cm36283";
-			reg = <0x60>;
-			interrupt-parent = <&msm_gpio>;
-			interrupts = <113 0x2>;
-			vdd-supply = <&pm8916_l17>;
-			vio-supply = <&pm8916_l6>;
-			capella,use-polling;
-			capella,interrupt-gpio = <&msm_gpio 113 0x2>;
-			capella,levels = <0x0A 0xA0 0xE1 0x140 0x280 0x500 0xA28 0x16A8 0x1F40 					0x2800>;
-			capella,ps_close_thd_set = <0x6>;
-			capella,ps_away_thd_set = <0x2>;
-			capella,ls_cmd = <0x4>;
-			capella,ps_conf1_val = <0x0006>;  /*CM36283_PS_ITB_1_2 | CM36283_PS_DR_1_40| CM36283_PS_IT_1T | CM36283_PS_PERS_2 | CM36283_PS_RES_1*/
-			capella,ps_conf3_val = <0x3010>;  /* CM36283_PS_MS_NORMAL | CM36283_PS_PROL_255 | CM36283_PS_SMART_PERS_ENABLE, */
-		};
-
 		di@1e {
 			compatible = "di,ap3426";
 			reg = <0x1e>;
@@ -115,6 +70,41 @@
 			di,ps-distance-table = <887 282 111 78 53 46>;
 			di,als-sensitivity = <50>;
 			di,wakeup-threshold = <0>;
+		};
+
+		capella@60 {
+			compatible = "capella,cm36283";
+			reg = <0x60>;
+			interrupt-parent = <&msm_gpio>;
+			interrupts = <113 0x2>;
+			vdd-supply = <&pm8916_l17>;
+			vio-supply = <&pm8916_l6>;
+			capella,use-polling;
+			capella,interrupt-gpio = <&msm_gpio 113 0x2>;
+			capella,levels = <0x0A 0xA0 0xE1 0x140 0x280 0x500 0xA28 0x16A8 0x1F40 					0x2800>;
+			capella,ps_close_thd_set = <0x6>;
+			capella,ps_away_thd_set = <0x2>;
+			capella,ls_cmd = <0x4>;
+			capella,ps_conf1_val = <0x0006>;  /*CM36283_PS_ITB_1_2 | CM36283_PS_DR_1_40| CM36283_PS_IT_1T | CM36283_PS_PERS_2 | CM36283_PS_RES_1*/
+			capella,ps_conf3_val = <0x3010>;  /* CM36283_PS_MS_NORMAL | CM36283_PS_PROL_255 | CM36283_PS_SMART_PERS_ENABLE, */
+		};
+
+		akm@d {
+			compatible = "ak,ak09911";
+			reg = <0xd>;
+			pinctrl-names = "default", "sleep";
+			pinctrl-0 = <&akm_default>;
+			pinctrl-1 = <&akm_sleep>;
+			vdd-supply = <&pm8916_l17>;
+			vio-supply = <&pm8916_l6>;
+			akm,layout = <0x3>;
+			akm,gpio_rstn = <&msm_gpio 16 0x0>;
+			akm,auto-report;
+		};
+
+		vtc@1c {
+			compatible = "vtc,af8133";
+			reg = <0x1c>;
 		};
 	};
 
@@ -163,4 +153,9 @@
 		memsic,dir = "obverse-x-axis-forward";
 		memsic,auto-report;
 	};
+};
+
+&pm8916_leds {
+	/delete-property/ status;
+	/delete-node/ qcom,led_mpp_2;
 };

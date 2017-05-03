@@ -272,12 +272,11 @@
 };
 
 &sdhc_2 {
-	qcom,nonhotplug;
-	interrupts = <0 1>;
+	interrupts = <0 1 2>;
 	interrupt-map = <0 &intc 0 125 0
-		1 &intc 0 221 0>;
-	interrupt-names = "hc_irq", "pwr_irq";
-	/delete-property/ cd-gpios;
+		1 &intc 0 221 0
+		2 &msm_gpio 38 0>;
+	interrupt-names = "hc_irq", "pwr_irq", "status_irq";
 };
 
 &usb_otg {
@@ -304,7 +303,6 @@
 	pinctrl-1 = <&mdss_dsi_suspend>;
 
 	qcom,platform-reset-gpio = <&msm_gpio 25 0>;
-	qcom,platform-bklight-en-gpio = <&msm_gpio 1 0>;
 
 	vsp-supply = <&tps65132_pos>;
 	vsn-supply = <&tps65132_neg>;
