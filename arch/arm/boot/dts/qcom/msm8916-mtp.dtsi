@@ -22,29 +22,25 @@
 
 &soc {
 	i2c@78b9000 { /* BLSP1 QUP5 */
-		synaptics@20 {
-			compatible = "synaptics,rmi4";
-			reg = <0x20>;
+		goodix@5d {
+			compatible = "goodix,gt9xx";
+			reg = <0x5d>;
 			interrupt-parent = <&msm_gpio>;
 			interrupts = <13 0x2008>;
 			vdd-supply = <&pm8916_l17>;
-			vcc_i2c-supply = <&pm8916_l6>;
-			/* pins used by touchscreen */
-			pinctrl-names = "pmx_ts_active","pmx_ts_suspend","pmx_ts_suspend";
-			pinctrl-0 = <&ts_int_active &ts_reset_active>;
-			pinctrl-1 = <&ts_int_suspend &ts_reset_suspend>;
-			pinctrl-2 = <&ts_release>;
-			synaptics,display-coords = <0 0 1079 1919>;
-			synaptics,panel-coords = <0 0 1079 2084>;
-			synaptics,irq-gpio = <&msm_gpio 13 0x2008>;
-			synaptics,reset-gpio = <&msm_gpio 12 0x0>;
-			synaptics,i2c-pull-up;
-			synaptics,power-down;
-			synaptics,disable-gpios;
-			/* Underlying clocks used by secure touch */
-			clocks = <&clock_gcc clk_gcc_blsp1_ahb_clk>,
-			 <&clock_gcc clk_gcc_blsp1_qup5_i2c_apps_clk>;
-			clock-names = "iface_clk", "core_clk";
+			vcc-i2c-supply = <&pm8916_l6>;
+			goodix,reset-gpios = <&msm_gpio 12 0x0>;
+			goodix,interrupt-gpios = <&msm_gpio 13 0x0>;
+			goodix,button-map = <139 172 158>;
+			goodix,panel-coords = <0 0 1080 1920>;
+			goodix,display-coords = <0 0 1080 1920>;
+			goodix,product-id = "9157";
+			goodix,num_max_touches = <5>;
+			goodix,soft_rst_dly = <20>;
+			goodix,fw_name = "gtp_fw.bin";
+			goodix,fw-vkey-support;
+			goodix,i2c-pull-up;
+			goodix,no-force-update;
 		};
 	};
 
@@ -127,6 +123,18 @@
 			vio-supply = <&pm8916_l6>;
 			ak,layout = <0x6>;
 			ak,auto-report;
+		};
+
+		tps65132-en-pin {
+			qcom,pins = <&gp 97>, <&gp 98>;
+			qcom,num-grp-pins = <2>;
+			label = "tps65132_en_pins";
+			qcom,pin-func = <0>;
+
+			tps65132_en_default: en-default {
+				drive-strength = <2>;
+				bias-pull-down;
+			};
 		};
 
 	};
@@ -351,13 +359,14 @@
 };
 
 #include "dsi-panel-jdi-1080p-video.dtsi"
+#include "q39/dsi-panel-truly-r63315-1080p-video.dtsi"
 
 &mdss_mdp {
 	qcom,mdss-pref-prim-intf = "dsi";
 };
 
 &dsi_jdi_1080_vid {
-	qcom,mdss-dsi-bl-pmic-control-type = "bl_ctrl_pwm";
+	qcom,mdss-dsi-bl-pmic-control-type = "bl_ctrl_wled";
 	qcom,mdss-dsi-bl-pmic-pwm-frequency = <100>;
 	qcom,mdss-dsi-bl-pmic-bank-select = <0>;
 	qcom,mdss-dsi-pwm-gpio = <&pm8916_mpps 4 0>;
@@ -375,14 +384,42 @@
 };
 
 &mdss_dsi0 {
-	qcom,dsi-pref-prim-pan = <&dsi_jdi_1080_vid>;
+	qcom,dsi-pref-prim-pan = <&dsi_r63315_video>;
 	pinctrl-names = "mdss_default", "mdss_sleep";
 	pinctrl-0 = <&mdss_dsi_active &mdss_te_active>;
 	pinctrl-1 = <&mdss_dsi_suspend &mdss_te_suspend>;
 
-	qcom,platform-enable-gpio = <&msm_gpio 97 0>;
 	qcom,platform-reset-gpio = <&msm_gpio 25 0>;
-	qcom,platform-bklight-en-gpio = <&msm_gpio 98 0>;
+	qcom,platform-bklight-en-gpio = <&msm_gpio 1 0>;
+
+	vsp-supply = <&tps65132_pos>;
+	vsn-supply = <&tps65132_neg>;
+
+	qcom,ctrl-supply-entries {
+		/delete-node/ qcom,ctrl-supply-entry@0;
+	};
+
+	qcom,panel-supply-entries {
+		/delete-node/qcom,panel-supply-entry@0;
+
+		qcom,panel-supply-entry@2 {
+			reg = <2>;
+			qcom,supply-name = "vsp";
+			qcom,supply-min-voltage = <5400000>;
+			qcom,supply-max-voltage = <5400000>;
+			qcom,supply-enable-load = <200>;
+			qcom,supply-disable-load = <0>;
+		};
+
+		qcom,panel-supply-entry@3 {
+			reg = <3>;
+			qcom,supply-name = "vsn";
+			qcom,supply-min-voltage = <5400000>;
+			qcom,supply-max-voltage = <5400000>;
+			qcom,supply-enable-load = <40>;
+			qcom,supply-disable-load = <0>;
+		};
+	};
 };
 
 &dsi_jdi_1080_vid {
