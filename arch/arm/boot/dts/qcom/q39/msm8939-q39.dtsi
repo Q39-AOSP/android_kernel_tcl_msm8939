@@ -44,6 +44,7 @@
 			goodix,i2c-pull-up;
 			goodix,no-force-update;
 		};
+		/delete-node/ focaltech@38;
 	};
 
 	i2c@78b6000 { /* BLSP1 QUP2 */
@@ -58,22 +59,6 @@
 			akm,layout = <0x3>;
 			akm,gpio_rstn = <&msm_gpio 16 0x0>;
 			akm,auto-report;
-		};
-
-		bosch@18 { /* Accelerometer sensor */
-			compatible = "bosch,bma2x2";
-			reg = <0x18>;
-			pinctrl-names = "bma_default","bma_sleep";
-			pinctrl-0 = <&bma2x2_int1_default &bma2x2_int2_default>;
-			pinctrl-1 = <&bma2x2_int1_sleep &bma2x2_int2_sleep>;
-			interrupt-parent = <&msm_gpio>;
-			interrupts = <112 0x2002>;
-			vdd-supply = <&pm8916_l17>;
-			vio-supply = <&pm8916_l6>;
-			bosch,init-interval = <200>;
-			bosch,place = <2>;
-			bosch,gpio-int1 = <&msm_gpio 112 0x2002>;
-			bosch,gpio-int2 = <&msm_gpio 114 0x2002>;
 		};
 
 		capella@60 {
@@ -116,6 +101,11 @@
 			di,als-sensitivity = <50>;
 			di,wakeup-threshold = <0>;
 		};
+
+		vtc@1c {
+			compatible = "vtc,af8133";
+			reg = <0x1c>;
+  		};
 	};
 
 	gpio-leds {
@@ -257,6 +247,24 @@
 			qcom,supply-disable-load = <0>;
 		};
 	};
+};
+
+&sdhc_2 {
+	/delete-property/ qcom,nonhotplug;
+	interrupts = <0 1 2>;
+	interrupt-map = <0 &intc 0 125 0
+		1 &intc 0 221 0
+		2 &msm_gpio 38 0>;
+	interrupt-names = "hc_irq", "pwr_irq", "status_irq";
+};
+
+&mdss_dsi0 {
+	/delete-node/ qcom,platform-bklight-en-gpio;
+};
+
+&pm8916_leds {
+	/delete-property/ status;
+	/delete-node/ qcom,led_mpp_2;
 };
 
 &dsi_nt35596_1080p_skuk_video {
