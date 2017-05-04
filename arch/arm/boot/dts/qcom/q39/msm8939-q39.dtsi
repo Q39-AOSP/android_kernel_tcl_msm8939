@@ -24,15 +24,15 @@
 
 &soc {
 	i2c@78b9000 { /* BLSP1 QUP5 */
-		goodix@5d {
+		goodix_ts@5d {
 			compatible = "goodix,gt9xx";
 			reg = <0x5d>;
 			interrupt-parent = <&msm_gpio>;
 			interrupts = <13 0x2008>;
-			vdd-supply = <&pm8916_l17>;
+			vdd_ana-supply = <&pm8916_l17>;
 			vcc-i2c-supply = <&pm8916_l6>;
-			goodix,reset-gpios = <&msm_gpio 12 0x0>;
-			goodix,interrupt-gpios = <&msm_gpio 13 0x0>;
+			goodix,rst-gpio = <&msm_gpio 12 0x0>;
+			goodix,irq-gpio = <&msm_gpio 13 0x0>;
 			goodix,button-map = <139 172 158>;
 			goodix,panel-coords = <0 0 1080 1920>;
 			goodix,display-coords = <0 0 1080 1920>;
