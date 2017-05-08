@@ -1,0 +1,4 @@
+[submodule "prima"]
+	path = drivers/staging/prima
+	url = https://source.codeaurora.org/quic/la/platform/vendor/qcom-opensource/wlan/prima
+ignore = dirty
