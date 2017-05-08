@@ -79,8 +79,27 @@ dtb-$(CONFIG_ARCH_MSM8909) += msm8909-sim.dtb \
 	apq8009-512mb-mtp-wcd9326-refboard.dtb
 
 ifeq ($(CONFIG_ARCH_MSM8916_Q39),y)
-dtb-$(CONFIG_ARCH_MSM8916) += msm8939-q39.dtb
-endif
+dtb-$(CONFIG_ARCH_MSM8916) += msm8916-cdp.dtb \
+	msm8916-cdp-smb1360.dtb \
+	msm8916-mtp.dtb \
+	msm8916-mtp-smb1360.dtb \
+	msm8916-qrd-skuh.dtb \
+	msm8916-qrd-skuhf.dtb \
+	msm8916-qrd-skui.dtb \
+	msm8916-qrd-skuic.dtb \
+	msm8916-qrd-skuid.dtb \
+	msm8916-qrd-skut1.dtb \
+	apq8016-mtp.dtb \
+	apq8016-mtp-smb1360.dtb \
+	apq8016-sbc.dtb \
+	msm8939-qrd-skuk.dtb \
+	msm8939-qrd-skul.dtb \
+	msm8939-cdp.dtb \
+	msm8939-mtp.dtb \
+	msm8939-mtp-smb1360.dtb \
+	msm8939-mtp-wcd9306.dtb \
+        msm8939-q39.dtb
+else
 dtb-$(CONFIG_ARCH_MSM8916) += msm8916-cdp.dtb \
 	msm8916-cdp-smb1360.dtb \
 	msm8916-mtp.dtb \
@@ -128,6 +147,7 @@ dtb-$(CONFIG_ARCH_MSM8916) += msm8916-cdp.dtb \
 	msm8929-qrd-skul.dtb \
 	msm8929-qrd-skulb.dtb \
 	msm8929-cdp-jdi.dtb
+endif
 dtb-$(CONFIG_ARCH_MSM8226) += msm8226-sim.dtb \
 	msm8226-fluid.dtb \
 	msm8226-v1-cdp.dtb \
